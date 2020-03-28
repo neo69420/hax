@@ -4,7 +4,7 @@ from subprocess import run
 
 
 def run_cmd(*args):
-    ret = run(args, capture_output=True)
+    ret = run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out = ret.stdout
     err = ret.stderr
 
