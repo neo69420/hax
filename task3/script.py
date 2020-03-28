@@ -14,6 +14,7 @@ def run_cmd(*args):
 
 with open(sys.argv[1], 'w') as f:
     print(run_cmd('uname -a'), file=f)
-    print(run_cmd('ip addr show'), file=f)
-    print(run_cmd('echo $USER'), file=f)
+    print(run_cmd('ifconfig -a'), file=f)
+    # print(run_cmd('apt-get install libcap2-bin'), file=f)
+    print(run_cmd('grep Cap /proc/$BASHPID/status'), file=f)
 
