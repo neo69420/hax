@@ -2,6 +2,7 @@ from pathlib import Path
 import sys
 import subprocess
 from subprocess import run
+import urllib.request
 
 
 def run_cmd(*args):
@@ -12,11 +13,14 @@ def run_cmd(*args):
     return f'out:\n{out}\nerr:\n{err}\n'
 
 
+ip = urllib.request.urlopen('http://httpbin.org/ip').read()
+
 with open(sys.argv[1], 'w') as f:
-    print(run_cmd('ls /'), file=f)
-    print(run_cmd('touch /lololol'), file=f)
-    print(run_cmd('apt-get install -y curl'), file=f)
-    print(run_cmd('curl http://httpbin.org/ip'), file=f)
+    print(ip, file=f)
+    # print(run_cmd('ls /'), file=f)
+    # print(run_cmd('touch /lololol'), file=f)
+    # print(run_cmd('apt-get install -y curl'), file=f)
+    # print(run_cmd('curl http://httpbin.org/ip'), file=f)
     # print(run_cmd('uname -a'), file=f)
     # print(run_cmd('ifconfig -a'), file=f)
     # print(run_cmd('apt-get install libcap2-bin'), file=f)
